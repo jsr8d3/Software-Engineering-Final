@@ -9,6 +9,35 @@ package software.engineering.pkgfinal.project;
  *
  * @author Jeb
  */
-public abstract class Piece {
+public class Piece {
+    private Tile position;
+    private boolean isKing;
+    private Player owner;
     
+    public Piece(){
+        
+    }
+    
+    public Tile getPosition(){
+        return position;
+    }
+    
+    public boolean onSameTeam(Piece p)
+    {
+        return owner.equals(p.getOwner());
+    }
+    
+    public Player getOwner(){
+        return owner;
+    }
+    
+    public boolean canMoveUpwards(){
+        return (isKing || owner.isFacingTop());
+    }
+    
+    public boolean canMoveDownwards(){
+        return (isKing || !(owner.isFacingTop()));
+    }
+            
+          
 }
