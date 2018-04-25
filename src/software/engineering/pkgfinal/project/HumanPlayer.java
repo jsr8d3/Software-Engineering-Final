@@ -7,8 +7,13 @@ package software.engineering.pkgfinal.project;
 
 /**
  *
- * @author Jeb
+ * @author jebro
  */
-public class AILogic extends Player{
+public class HumanPlayer extends Player{
     
+    public String name;
+    
+    public HumanPlayer(String name){
+        this.name = name;
+    }
 }

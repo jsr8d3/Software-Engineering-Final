@@ -6,11 +6,16 @@
 package software.engineering.pkgfinal.project;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 
 /**
  *
@@ -19,17 +24,36 @@ import javafx.scene.control.Label;
 public class FXMLDocumentController implements Initializable {
     
     @FXML
-    private Label label;
-    
+    private ChoiceBox<?> playerOnePicker;    
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
+    private ChoiceBox<?> playerTwoPicker;
+    @FXML
+    private Button playButton;
     
+
+    
+    //to later be retrieved from data base now just to make sure things work
+    private static final String dummyNameData[] = {Game.COMPUTER_NAME, "Jeb", "Brighton", "Akshay", "Foo"};
+     private static final List<String> names = new ArrayList();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        //replace with retrieving code from the data base.
+        for(String s: dummyNameData)
+            names.add(s);
+        ObservableList list = FXCollections.observableArrayList(names);
+        playerOnePicker.setItems(list);
+        playerTwoPicker.setItems(list);
     }    
+    
+    @FXML
+    private void playButtonPressed(ActionEvent event) {
+        //playerOnePicker.getValue();
+        String nameForPlayerOne = (String) playerOnePicker.getValue();
+        String nameForPlayerTwo = (String) playerTwoPicker.getValue();
+        
+        Game game = new Game(nameForPlayerOne, nameForPlayerTwo);
+        System.out.println("Checking player names are correct p1 = " + nameForPlayerOne +"  and p2 = " + nameForPlayerTwo);
+    }
     
 }

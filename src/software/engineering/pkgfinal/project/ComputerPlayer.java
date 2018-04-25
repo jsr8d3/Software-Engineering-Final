@@ -7,8 +7,8 @@ package software.engineering.pkgfinal.project;
 
 /**
  *
- * @author Jeb
+ * @author jebro
  */
-public class AILogic extends Player{
-    
+public class ComputerPlayer extends Player{
+    int difficulty;
 }

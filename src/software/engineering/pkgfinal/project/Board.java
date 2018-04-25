@@ -24,7 +24,7 @@ public class Board {
     private Tile tiles[][];
     public Board(int boardSize){
         this.boardSize = boardSize;
-        
+        fillBoard();
     }
     
     public Board(){

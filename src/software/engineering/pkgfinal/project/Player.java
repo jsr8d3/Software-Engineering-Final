@@ -11,8 +11,20 @@ package software.engineering.pkgfinal.project;
  */
 public class Player {
     private boolean top;
+    private int playerID;
     
     public boolean isFacingTop(){
         return top;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof Player)
+        {
+            return ((Player)o).playerID == playerID;
+        }
+        return false;
+    }
+    
+    
 }
