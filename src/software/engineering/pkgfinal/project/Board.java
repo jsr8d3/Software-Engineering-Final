@@ -18,17 +18,40 @@ public class Board {
     public static final int DIAGNOL_DOWN_RIGHT = 2;
     public static final int DIAGNOL_DOWN_LEFT = 3;
     
+    public static final int HEURISTIC_OF_END = 1000;
+    
     
     private final int boardSize;
     private ArrayList<Piece> pieces;
     private Tile tiles[][];
+    //positive for player facing upwards
+    private int heuristicValue;
+    
     public Board(int boardSize){
         this.boardSize = boardSize;
         fillBoard();
+        calculateBoardHeurstic();
     }
     
     public Board(){
         this(DEFAULT_BOARD_SIZE);
+    }
+    
+    //creates a copy of the board
+    public Board(Board board){
+        boardSize = board.boardSize;
+        pieces = (ArrayList<Piece>)board.pieces.clone();
+        tiles = board.tiles.clone();
+        calculateBoardHeurstic();
+    }
+    
+    public void applyMove(Move move){
+        Piece movedPiece = move.getMovingPiece();
+        movedPiece.setNewPosition(move.getNewTile());
+        Tile jumped = move.getJumpedTile();
+        Piece jumpedPiece = isPieceAtPosition(jumped);
+        if(jumpedPiece != null)
+            pieces.remove(jumpedPiece);
     }
     
     private void fillBoard(){
@@ -39,6 +62,55 @@ public class Board {
             }
         }
         //TODO code that initializes the board
+    }
+    
+    public int getNumberOfPieces(){
+        int score = 0;
+        for(Piece p: pieces){
+            if(p.getOwner().isFacingTop()){
+                if(p.isKing()){
+                    score += 5;
+                } else{
+                    score += 3;
+                }
+            } else{
+                if(p.isKing()){
+                    score -= 5;
+                } else{
+                    score -= 3;
+                }
+            }
+        }
+        return score;
+    }
+    
+    public int distanceFromBecomingKing(){
+        int score = 0;
+        for(Piece p: pieces){
+            if(p.getOwner().isFacingTop()){
+                if(p.isKing()){
+                    score += 8;
+                } else{
+                    score += p.getPosition().getColumn();
+                }
+            } else {
+                if(p.isKing()){
+                    score -= 5;
+                } else{
+                    score -= boardSize - p.getPosition().getColumn();
+                }
+            }
+        }
+        return score;
+    }
+    
+    private void calculateBoardHeurstic(){
+        heuristicValue = getNumberOfPieces()*5;
+        heuristicValue += distanceFromBecomingKing();
+    }
+    
+    public int getBoardHeursticValue(Player player){
+        return heuristicValue;
     }
     
     private Piece isPieceAtPosition(Tile position){
@@ -121,5 +193,16 @@ public class Board {
             }
         }
         return moves;
+    }
+    
+    public ArrayList<Board> getPossibleNextBoards(Player player){
+        ArrayList<Move> moves = possibleMoves(player);
+        ArrayList<Board> possibleBoards = new ArrayList();
+        for(Move m: moves){
+            Board outcome = new Board(this);
+            outcome.applyMove(m);
+            possibleBoards.add(outcome);
+        }
+        return possibleBoards;
     }
 }

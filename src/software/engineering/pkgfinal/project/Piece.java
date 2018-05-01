@@ -38,6 +38,12 @@ public class Piece {
     public boolean canMoveDownwards(){
         return (isKing || !(owner.isFacingTop()));
     }
+    
+    public void setNewPosition(Tile newPosition){
+        position = newPosition;
+    }
             
-          
+    public boolean isKing(){
+        return isKing;
+    }
 }
