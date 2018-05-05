@@ -25,6 +25,13 @@ public class SoftwareEngineeringFinalProject extends Application {
         
         stage.setScene(scene);
         stage.show();
+        
+       /* Stage s = new Stage(); 
+        s.setWidth(100);
+        s.setHeight(200);
+        s.setTitle("Hello");
+        s.setScene(scene);
+        s.show();*/
     }
 
     /**

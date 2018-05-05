@@ -11,4 +11,8 @@ package software.engineering.pkgfinal.project;
  */
 public class ComputerPlayer extends Player{
     int difficulty;
+
+    public ComputerPlayer(boolean facingTop) {
+        super(facingTop);
+    }
 }

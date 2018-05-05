@@ -24,13 +24,27 @@ public class Board {
     private final int boardSize;
     private ArrayList<Piece> pieces;
     private Tile tiles[][];
+    private Player playerUp;
+    private Player playerDown;
     //positive for player facing upwards
     private int heuristicValue;
     
-    public Board(int boardSize){
+    public Board(Player up, Player down, int boardSize){
+        playerUp = up;
+        playerDown = down;
         this.boardSize = boardSize;
+        pieces = new ArrayList();
+        
         fillBoard();
         calculateBoardHeurstic();
+    }
+    
+    public Board(Player up, Player down){
+        this(up, down, DEFAULT_BOARD_SIZE);
+    }
+    
+    public Board(int boardSize){
+        this(new ComputerPlayer(true), new ComputerPlayer(false), boardSize);   
     }
     
     public Board(){
@@ -55,10 +69,19 @@ public class Board {
     }
     
     private void fillBoard(){
+
         tiles = new Tile[boardSize][boardSize];
         for(int i = 0; i < boardSize; i++){
             for(int j = 0; j < boardSize; j++){
                 tiles[i][j] = new Tile(i, j);
+                if(i < 3){
+                    Piece p = new Piece(playerUp, tiles[i][j], boardSize);
+                    pieces.add(p);
+                } else if( i > boardSize - 4){
+                    Piece p = new Piece(playerDown, tiles[i][j], boardSize);
+                    pieces.add(p);
+                }
+                
             }
         }
         //TODO code that initializes the board
@@ -204,5 +227,9 @@ public class Board {
             possibleBoards.add(outcome);
         }
         return possibleBoards;
+    }
+    
+    public ArrayList<Piece> getPieces(){
+        return pieces;
     }
 }

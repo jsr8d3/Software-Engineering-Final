@@ -10,8 +10,12 @@ package software.engineering.pkgfinal.project;
  * @author jebro
  */
 public class Game {
-    Player playerOne;
-    Player playerTwo;
+    private Player playerOne;
+    private Player playerTwo;
+    
+    private Board board;
+    private CheckerBoard checkerBoard;
+    
     
     public static final String COMPUTER_NAME = "computer";
     
@@ -20,16 +24,21 @@ public class Game {
     }
     
     public Game(String nameOfPlayerOne, String nameOfPlayerTwo){
-        playerOne = createPlayerFromString(nameOfPlayerOne);
-        playerTwo = createPlayerFromString(nameOfPlayerTwo);
+        playerOne = createPlayerFromString(nameOfPlayerOne, true);
+        playerTwo = createPlayerFromString(nameOfPlayerTwo, false);
     }
     
-    private Player createPlayerFromString(String name){
+    private Player createPlayerFromString(String name, boolean top){
 
-        if(name.equals(COMPUTER_NAME)){
-            return new ComputerPlayer();
+        if(name == null || name.equals(COMPUTER_NAME)){
+            return new ComputerPlayer(top);
         }
         
-        return new HumanPlayer(name);
+        return new HumanPlayer(name, top);
+    }
+    
+    public void start(){
+        board = new Board(playerOne, playerTwo);
+        checkerBoard = new CheckerBoard(8, board.getPieces());
     }
 }

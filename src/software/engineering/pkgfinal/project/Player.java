@@ -13,6 +13,10 @@ public class Player {
     private boolean top;
     private int playerID;
     
+    public Player(boolean facingTop){
+        top = facingTop;
+    }
+    
     public boolean isFacingTop(){
         return top;
     }

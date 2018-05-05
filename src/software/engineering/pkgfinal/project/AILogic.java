@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Jeb
  */
-public class AILogic extends Player{
+public class AILogic{
     Player player;
     
     public AILogic(Player player){

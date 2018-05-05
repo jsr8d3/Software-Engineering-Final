@@ -5,10 +5,19 @@
  */
 package software.engineering.pkgfinal.project;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
+
 /**
  *
  * @author Jeb
  */
-public class Pawn extends Piece{
+public class CheckerBoardController implements Initializable{
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        
+    }
     
 }

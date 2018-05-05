@@ -54,6 +54,7 @@ public class FXMLDocumentController implements Initializable {
         
         Game game = new Game(nameForPlayerOne, nameForPlayerTwo);
         System.out.println("Checking player names are correct p1 = " + nameForPlayerOne +"  and p2 = " + nameForPlayerTwo);
+        game.start();
     }
     
 }

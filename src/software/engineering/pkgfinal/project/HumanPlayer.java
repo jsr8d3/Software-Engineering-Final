@@ -13,7 +13,8 @@ public class HumanPlayer extends Player{
     
     public String name;
     
-    public HumanPlayer(String name){
+    public HumanPlayer(String name, boolean facingTop){
+        super(facingTop);
         this.name = name;
     }
 }
