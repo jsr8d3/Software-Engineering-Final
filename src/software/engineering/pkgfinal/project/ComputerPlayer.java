@@ -11,8 +11,23 @@ package software.engineering.pkgfinal.project;
  */
 public class ComputerPlayer extends Player{
     int difficulty;
+    AILogic logic;
 
-    public ComputerPlayer(boolean facingTop) {
-        super(facingTop);
+    public ComputerPlayer(Board board, boolean facingTop) {
+        super(board, facingTop);
+        logic = new AILogic(this);
+    }
+
+    @Override
+    public boolean handleTilePress(int row, int column) {
+        return false;
+    }
+    
+    @Override
+    public boolean startTurn(){
+        Move m = logic.getNextBoard(board);
+        m = board.convertMove(m);
+        board.applyMove(m);
+        return true;
     }
 }

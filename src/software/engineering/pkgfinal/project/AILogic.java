@@ -18,8 +18,8 @@ public class AILogic{
         this.player = player;
     }
     
-    public void getNextBoard(Board current){
-        
+    public Move getNextBoard(Board current){
+        return maxValue(current, 3).getLastMove();
     }
     
     public Board maxValue(Board board, int depth){
@@ -33,7 +33,7 @@ public class AILogic{
             Board candidate = minValue(b, depth-1);
             if(max == null ||
                     max.getBoardHeursticValue(player) < candidate.getBoardHeursticValue(player)){
-                max = candidate;
+                max = b;
             }
         }
         return max;
@@ -47,10 +47,10 @@ public class AILogic{
         ArrayList<Board> nextBoards = board.getPossibleNextBoards(player);
         Board min = null;
         for(Board b: nextBoards){
-            Board candidate = minValue(b, depth-1);
+            Board candidate = maxValue(b, depth-1);
             if(min == null ||
                     min.getBoardHeursticValue(player) < candidate.getBoardHeursticValue(player)){
-                min = candidate;
+                min = b;
             }
         }
         return min;

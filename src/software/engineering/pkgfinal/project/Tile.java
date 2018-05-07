@@ -43,6 +43,11 @@ public class Tile {
         hash = 41 * hash + this.column;
         return hash;
     }
+
+    @Override
+    public String toString() {
+        return "Row = " + row + " | Column = " + column; //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }

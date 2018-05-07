@@ -5,20 +5,30 @@
  */
 package software.engineering.pkgfinal.project;
 
+import java.util.Random;
+
 /**
  *
  * @author jebro
  */
-public class Player {
+public abstract class Player{
     private boolean top;
-    private int playerID;
+    private final int playerID;
+    protected Board board;
     
-    public Player(boolean facingTop){
+    public Player(Board board, boolean facingTop){
         top = facingTop;
+        this.board = board;
+        Random r = new Random();
+        playerID = r.nextInt();
     }
     
     public boolean isFacingTop(){
         return top;
+    }
+    
+    public void setBoard(Board board){
+        this.board = board;
     }
 
     @Override
@@ -30,5 +40,7 @@ public class Player {
         return false;
     }
     
+    public abstract boolean startTurn();
     
+    public abstract boolean handleTilePress(int row, int column);
 }

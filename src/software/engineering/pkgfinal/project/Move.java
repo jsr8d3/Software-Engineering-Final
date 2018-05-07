@@ -5,6 +5,9 @@
  */
 package software.engineering.pkgfinal.project;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 /**
  *
  * @author jebro
@@ -13,14 +16,14 @@ public class Move {
     private Piece movingPiece;
     private Tile newTile;
     private boolean jumps;
-    private Tile jumpedTile;
+    private ArrayList<Tile> jumpedTile;
     
     public Move(Piece piece, Tile tile){
         movingPiece = piece;
         newTile = tile;
-        
-       jumps = calculateIsJump();
-       calculateJumpedTile();
+        jumpedTile = new ArrayList();
+        jumps = calculateIsJump();
+        //calculateJumpedTile();
     }
     
     private boolean calculateIsJump(){
@@ -31,7 +34,7 @@ public class Move {
         return Math.abs(deltaRow) > 1 || Math.abs(deltaColumn) > 1;
     }
     
-    private void calculateJumpedTile(){
+    /*private void calculateJumpedTile(){
         Tile currentTile = movingPiece.getPosition();
         int deltaRow = newTile.getRow() - currentTile.getRow();
         int deltaColumn = newTile.getColumn() - currentTile.getColumn();
@@ -41,6 +44,14 @@ public class Move {
         } else{
             jumpedTile = null;
         }
+    }*/
+    
+    public void addJumpTile(Tile tile){
+        jumpedTile.add(tile);
+    }
+    
+    public void addMultipleJumpTiles(Collection<Tile> tiles){
+        jumpedTile.addAll(tiles);
     }
     
     public Piece getMovingPiece(){
@@ -51,11 +62,11 @@ public class Move {
         return newTile;
     }
     
-    public Tile getJumpedTile(){
+    public ArrayList<Tile> getJumpedTile(){
         return jumpedTile;
     }
     
     public boolean isJumping(){
-        return jumps;
+        return jumpedTile.isEmpty();
     }
 }

@@ -26,26 +26,52 @@ public class CheckerBoard {
     private final GridPane checkerBoard;
     private int boardSize;
     public static final int TILE_LENGTH = 80;
+    private ArrayList<Rectangle> checkerTiles;
     private ArrayList<Piece> pieces;
+    //private CheckerBoardController controller;
     
-    public CheckerBoard(int boardSize, ArrayList<Piece> pieces){
+    public CheckerBoard(int boardSize, ArrayList<Piece> pieces, TilePress tileHandler){
         checkerBoard = new GridPane();
         scene = new Scene(root);
         scene.setFill(Color.ANTIQUEWHITE);
+        checkerTiles = new ArrayList();
         this.boardSize = boardSize;
         this.pieces = pieces;
+        //controller = new CheckerBoardController(checkerTiles, pieces, boardSize);
         
         fillCheckerBoard();
+        
         
         for(Piece p: pieces){
             System.out.println(p);
         }
         
-        root.getChildren().addAll(pieces);
+        for(Piece p: pieces){
+            root.getChildren().add(p.getCircle());
+        }
+        //controller.initTileMouseEvents();
+        
+        //putting the mouse handler on the scene. Putting it one each rectangle makes the ui unresponsive
+        scene.setOnMousePressed((MouseEvent event)->{
+                    int rectanglex = (int)event.getSceneX();
+                    int rectangley = (int)event.getSceneY();
+                    
+                    int column = rectanglex/TILE_LENGTH;
+                    int row = boardSize - 1 - rectangley/TILE_LENGTH;
+                    
+                    tileHandler.onTilePressed(row, column);
+                    System.out.println("Row = " + row + " | Column = " + column);
+        });
         
         stage.setTitle("CheckerBoard");
         stage.setScene(scene);
         stage.show();
+    }
+    
+    public void removePieceFromBoard(Piece p){
+        if(!pieces.contains(p))
+            return;
+        root.getChildren().remove(p.getCircle());
     }
     
     private void fillCheckerBoard(){
@@ -59,9 +85,17 @@ public class CheckerBoard {
                     r.setFill(Color.RED);
                 }
                 root.getChildren().add(r);
-                r.setOnMouseClicked((MouseEvent event) -> { //precursor for what comes next. Just making sure it was possible to read in mouse events on a rectangle.
-                    System.out.println("Mouse Clicked here "+event.toString());
-                });
+                /*r.setOnMouseClicked((MouseEvent event) -> { 
+                    Rectangle target = (Rectangle) event.getTarget();
+                    int rectanglex = (int)target.getX();
+                    int rectangley = (int)target.getY();
+                    
+                    int row = rectanglex/TILE_LENGTH;
+                    int column = boardSize - 1 - rectangley/TILE_LENGTH;
+                    
+                    System.out.println("Row = " + row + " | Column = " + column);
+                });*/
+                checkerTiles.add(r);
             }
         }
         
