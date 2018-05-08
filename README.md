@@ -1,6 +1,7 @@
 # Software Engineering Final Project: Checkers Game with AI and Database 
 ## Group Members: Jebediah Robertson, Brighton Fleetwood, Sai Akshay Chavakula
-## Original Requirements Analysis: [Requirements](Requirements.md)
+## Requirements Analysis: [Requirements](Requirements.MD)
+## Database Entity Relationship Diagram: [ERD](SECheckersERD.png)
 ## Axosoft: [Axosoft Link](https://jeb.axosoft.com/)
 ## Video: [Youtube](...)
 ## Description:
