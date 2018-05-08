@@ -38,11 +38,13 @@ public class HumanPlayer extends Player{
     }
     
     
-    private void makePotentialStartingPiece(int row, int column){
+    private void showAvailableSquares(int row, int column){
         Piece p = board.isPieceAtPosition(new Tile(row, column));
         if(p == null || !p.getOwner().equals(this))
             return;
         
+        ArrayList<Tile> possibleTile= board.tilesPieceCanMoveTo(p);
+        board.makeTilesGlow(possibleTile);
         setActivePiece(p);
     }
     
@@ -58,7 +60,7 @@ public class HumanPlayer extends Player{
                 madeAMove=true;
             }
         }
-        
+        board.resetTiles();
         removeActivePiece();
         return madeAMove;
     }
@@ -66,7 +68,7 @@ public class HumanPlayer extends Player{
     @Override
     public boolean handleTilePress(int row, int column) {
         if(active == null){
-            makePotentialStartingPiece(row, column);
+            showAvailableSquares(row, column);
             return false;
         } else {
             return makeMove(row, column);

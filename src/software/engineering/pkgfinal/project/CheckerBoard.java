@@ -60,12 +60,43 @@ public class CheckerBoard {
                     int row = boardSize - 1 - rectangley/TILE_LENGTH;
                     
                     tileHandler.onTilePressed(row, column);
-                    System.out.println("Row = " + row + " | Column = " + column);
         });
         
         stage.setTitle("CheckerBoard");
         stage.setScene(scene);
         stage.show();
+    }
+    
+    public void lightUpTiles(ArrayList<Tile> tiles){
+        for(Rectangle r: checkerTiles){
+            int rectanglex = (int)r.getX();
+            int rectangley = (int)r.getY();
+
+            int column = rectanglex/TILE_LENGTH;
+            int row = boardSize - 1 - rectangley/TILE_LENGTH;
+            Tile rectangleTile = new Tile(row, column);
+            for(Tile t: tiles){
+                if(t.equals(rectangleTile)){
+                    r.setFill(Color.DARKSLATEBLUE);
+                }
+            }
+        }
+    }
+    
+    public void recolorTiles(){
+        for(Rectangle r: checkerTiles){
+            int rectanglex = (int)r.getX();
+            int rectangley = (int)r.getY();
+
+            int column = rectanglex/TILE_LENGTH;
+            int row = boardSize - 1 - rectangley/TILE_LENGTH;
+
+            if((row+column)%2 == 0){
+                r.setFill(Color.BLACK);
+            } else {
+                r.setFill(Color.RED);
+            }
+        }
     }
     
     public void destroy(){

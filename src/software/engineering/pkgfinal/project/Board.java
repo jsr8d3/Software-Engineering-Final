@@ -184,6 +184,14 @@ public class Board {
         
     }
     
+    public void makeTilesGlow(ArrayList<Tile> tile){
+        checkerBoard.lightUpTiles(tile);
+    }
+    
+    public void resetTiles(){
+        checkerBoard.recolorTiles();
+    }
+    
     public int getNumberOfPieces(){
         int score = 0;
         for(Piece p: pieces){
