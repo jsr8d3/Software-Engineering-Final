@@ -15,9 +15,10 @@ public class ComputerPlayer extends Player{
     int difficulty;
     AILogic logic;
 
-    public ComputerPlayer(Game game, Board board, boolean facingTop) {
+    public ComputerPlayer(Game game, Board board, boolean facingTop, int difficulty) {
         super(game, board, facingTop);
         logic = new AILogic(this);
+        this.difficulty = difficulty;
     }
 
     @Override
@@ -27,7 +28,7 @@ public class ComputerPlayer extends Player{
     
     @Override
     public boolean startTurn(){
-        Move m = logic.getNextBoard(board);
+        Move m = logic.getNextBoard(board, difficulty*2);
         final Move converted = board.convertMove(m);
         
         //board.applyMove(m);
