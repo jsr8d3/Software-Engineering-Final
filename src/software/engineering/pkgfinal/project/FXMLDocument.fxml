@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -7,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="software.engineering.pkgfinal.project.FXMLDocumentController">
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="software.engineering.pkgfinal.project.FXMLDocumentController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -20,20 +21,28 @@
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
          <children>
-            <Label text="Player 1" textAlignment="CENTER" />
+            <Label text="Player 1" textAlignment="CENTER" textFill="RED" />
             <ChoiceBox fx:id="playerOnePicker" prefWidth="150.0" />
          </children>
       </VBox>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
-            <Label text="Player 2" />
+            <Label alignment="CENTER" text="Player 2" textFill="RED" />
             <ChoiceBox fx:id="playerTwoPicker" prefWidth="150.0" />
          </children>
       </VBox>
-      <Label text="Label" GridPane.columnSpan="2147483647" />
+      <VBox alignment="CENTER" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <children>
+            <Label contentDisplay="CENTER" text="Final Project Checkers Game" textFill="RED" GridPane.columnSpan="2">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
-            <Button fx:id="playButton" mnemonicParsing="false" onAction="#playButtonPressed" text="Play" />
+            <Button fx:id="playButton" mnemonicParsing="false" onAction="#playButtonPressed" text="Play" textFill="BLUE" />
          </children>
       </HBox>
    </children>
