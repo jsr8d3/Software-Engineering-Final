@@ -33,7 +33,7 @@ public class FXMLDocumentController implements Initializable {
 
     
     //to later be retrieved from data base now just to make sure things work
-    private static final String dummyNameData[] = {Game.COMPUTER_EASY, Game.COMPUTER_NORMAL, Game.COMPUTER_NORMAL, "User"};
+    private static final String dummyNameData[] = {Game.COMPUTER_EASY, Game.COMPUTER_NORMAL, Game.COMPUTER_HARD, "User"};
      private static final List<String> names = new ArrayList();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
