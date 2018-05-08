@@ -36,12 +36,12 @@ public class Board {
     
     public Board(TilePress handler, Player up, Player down, int boardSize){
         if(up == null)
-            playerUp = new ComputerPlayer(null, this, true);
+            playerUp = new ComputerPlayer(null, this, true, 1);
         else
             playerUp = up;
         
         if(down == null)
-            playerDown = new ComputerPlayer(null, this, false);
+            playerDown = new ComputerPlayer(null, this, false, 1);
         else
             playerDown = down;
         
@@ -182,8 +182,6 @@ public class Board {
             }
         }
         
-        pieces.add(new Piece(playerDown, tiles[3][1], boardSize));
-        //TODO code that initializes the board
     }
     
     public int getNumberOfPieces(){

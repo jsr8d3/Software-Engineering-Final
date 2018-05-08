@@ -27,6 +27,10 @@ public class Game implements TilePress{
     public static final String COMPUTER_NORMAL = "computer normal";
     public static final String COMPUTER_HARD = "computer hard";
     
+    private static final int easy = 1;
+    private static final int normal = 2;
+    private static final int hard = 3;
+    
     public Game(Player playerOne, Player playerTwo){
         
     }
@@ -39,11 +43,11 @@ public class Game implements TilePress{
     private Player createPlayerFromString(String name, boolean top){
 
         if(name == null || name.equals(COMPUTER_EASY)){
-            return new ComputerPlayer(this, board, top);
+            return new ComputerPlayer(this, board, top, easy);
         } else if(name.equals(COMPUTER_NORMAL)){
-            return new ComputerPlayer(this, board, top);
+            return new ComputerPlayer(this, board, top, normal);
         } else if(name.equals(COMPUTER_HARD)){
-            return new ComputerPlayer(this, board, top);
+            return new ComputerPlayer(this, board, top, hard);
         }
         
         return new HumanPlayer(this, board, top, name);
