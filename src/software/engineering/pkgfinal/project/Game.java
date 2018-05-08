@@ -23,7 +23,9 @@ public class Game implements TilePress{
     public static final int PLAYER_TWO = 2;
     private int turn = PLAYER_TWO;
     
-    public static final String COMPUTER_NAME = "computer";
+    public static final String COMPUTER_EASY = "computer easy";
+    public static final String COMPUTER_NORMAL = "computer normal";
+    public static final String COMPUTER_HARD = "computer hard";
     
     public Game(Player playerOne, Player playerTwo){
         
@@ -36,7 +38,11 @@ public class Game implements TilePress{
     
     private Player createPlayerFromString(String name, boolean top){
 
-        if(name == null || name.equals(COMPUTER_NAME)){
+        if(name == null || name.equals(COMPUTER_EASY)){
+            return new ComputerPlayer(this, board, top);
+        } else if(name.equals(COMPUTER_NORMAL)){
+            return new ComputerPlayer(this, board, top);
+        } else if(name.equals(COMPUTER_HARD)){
             return new ComputerPlayer(this, board, top);
         }
         
@@ -54,7 +60,6 @@ public class Game implements TilePress{
     {
         int state = board.getBoardHeursticValue(playerOne);
       if(state == Board.HEURISTIC_OF_END){
-            System.out.println("Player One Won!");
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Player 1 won!", ButtonType.OK);
             alert.setTitle("Game Over");
             alert.setHeaderText(null);
@@ -63,7 +68,6 @@ public class Game implements TilePress{
             return;
             
         } else if(state == -Board.HEURISTIC_OF_END){
-            System.out.println("Player 2 Won!");
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Player 2 won!", ButtonType.OK);
             alert.showAndWait();
             alert.setTitle("Game Over");
