@@ -243,7 +243,7 @@ public class Board {
                 }
             } else{
                 if(possibleMoves(playerUp).isEmpty()){
-                    heuristicValue = HEURISTIC_OF_END;
+                    heuristicValue = -HEURISTIC_OF_END;
                     return;
                 }
             }
