@@ -5,6 +5,7 @@
  */
 package software.engineering.pkgfinal.project;
 
+import com.sun.media.jfxmedia.MediaManager;
 import java.util.ArrayList;
 
 /**
@@ -35,12 +36,12 @@ public class Board {
     
     public Board(TilePress handler, Player up, Player down, int boardSize){
         if(up == null)
-            playerUp = new ComputerPlayer(this, true);
+            playerUp = new ComputerPlayer(null, this, true);
         else
             playerUp = up;
         
         if(down == null)
-            playerDown = new ComputerPlayer(this, false);
+            playerDown = new ComputerPlayer(null, this, false);
         else
             playerDown = down;
         
@@ -99,6 +100,8 @@ public class Board {
     }
     
     public void applyMove(Move move){
+        if(move == null)
+            return;
         Piece movedPiece = move.getMovingPiece();
         movedPiece.setNewPosition(move.getNewTile());
         ArrayList<Tile> jumpedTiles = move.getJumpedTile();
@@ -114,6 +117,7 @@ public class Board {
         if(shouldPieceBecomeKing(movedPiece))
             movedPiece.makeKing();
         lastMove = move;
+        calculateBoardHeurstic();
     }
     
     public Board applyTestMove(Move move){
@@ -139,7 +143,8 @@ public class Board {
             return null;
         if(shouldPieceBecomeKing(movedPiece))
             movedPiece.makeKing();
-        lastMove = newBoard.convertMove(move);
+        newBoard.lastMove = newBoard.convertMove(move);
+        newBoard.calculateBoardHeurstic();
         return newBoard;
     }
     
@@ -153,6 +158,10 @@ public class Board {
             return true;
         
         return false;
+    }
+    
+    public void destroy(){
+        checkerBoard.destroy();
     }
     
     private void fillBoard(){
@@ -194,6 +203,7 @@ public class Board {
                 }
             }
         }
+        
         return score;
     }
     
@@ -208,9 +218,9 @@ public class Board {
                 }
             } else {
                 if(p.isKing()){
-                    score -= 5;
+                    score -= 8;
                 } else{
-                    score -= boardSize - p.getPosition().getColumn();
+                    score -= boardSize - p.getPosition().getColumn() - 1;
                 }
             }
         }
@@ -218,12 +228,29 @@ public class Board {
     }
     
     private void calculateBoardHeurstic(){
-        heuristicValue = getNumberOfPieces()*5;
+        if(lastMove != null){
+            Player madeLastMove = lastMove.getMovingPiece().getOwner();
+            if(madeLastMove.equals(playerUp)){
+                if(possibleMoves(playerDown).isEmpty()){
+                    heuristicValue = HEURISTIC_OF_END;
+                    return; 
+                }
+            } else{
+                if(possibleMoves(playerUp).isEmpty()){
+                    heuristicValue = HEURISTIC_OF_END;
+                    return;
+                }
+            }
+        }
+        heuristicValue = getNumberOfPieces()*100;
         heuristicValue += distanceFromBecomingKing();
     }
     
     public int getBoardHeursticValue(Player player){
-        return heuristicValue;
+        if(player.equals(playerUp))
+            return heuristicValue;
+        else
+            return -heuristicValue;
     }
     
     public void applyBoard(Board board){

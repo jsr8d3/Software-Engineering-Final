@@ -19,7 +19,7 @@ public class AILogic{
     }
     
     public Move getNextBoard(Board current){
-        return maxValue(current, 3).getLastMove();
+        return maxValue(current, 6).getLastMove();
     }
     
     public Board maxValue(Board board, int depth){

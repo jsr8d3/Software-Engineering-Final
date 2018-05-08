@@ -15,12 +15,14 @@ public abstract class Player{
     private boolean top;
     private final int playerID;
     protected Board board;
+    protected Game game;
     
-    public Player(Board board, boolean facingTop){
+    public Player(Game game, Board board, boolean facingTop){
         top = facingTop;
         this.board = board;
         Random r = new Random();
         playerID = r.nextInt();
+        this.game = game;
     }
     
     public boolean isFacingTop(){

@@ -68,6 +68,10 @@ public class CheckerBoard {
         stage.show();
     }
     
+    public void destroy(){
+        stage.close();
+    }
+    
     public void removePieceFromBoard(Piece p){
         if(!pieces.contains(p))
             return;

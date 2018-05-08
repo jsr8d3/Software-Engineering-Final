@@ -18,8 +18,8 @@ public class HumanPlayer extends Player{
     private ArrayList<Move> possibleMovesForActivePiece;
     
     
-    public HumanPlayer(Board board, boolean facingTop,String name){
-        super(board, facingTop);
+    public HumanPlayer(Game game, Board board, boolean facingTop,String name){
+        super(game, board, facingTop);
         this.name = name;
         possibleMovesForActivePiece = new ArrayList();
     }
